@@ -10,22 +10,24 @@ import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+
 /**
- * Button widget
- * @author zhangjianshe
+ * Button widget.
  *
+ * @author zhangjianshe
  */
 public class MapwayButton extends ButtonBase {
 
 	  /**
-	   * Creates a Button widget that wraps an existing &lt;button&gt; element.
-	   * 
-	   * This element must already be attached to the document. If the element is
-	   * removed from the document, you must call
-	   * {@link RootPanel#detachNow(Widget)}.
-	   * 
-	   * @param element the element to be wrapped
-	   */
+  	 * Creates a Button widget that wraps an existing &lt;button&gt; element.
+  	 * 
+  	 * This element must already be attached to the document. If the element is
+  	 * removed from the document, you must call
+  	 * {@link RootPanel#detachNow(Widget)}.
+  	 *
+  	 * @param element the element to be wrapped
+  	 * @return the mapway button
+  	 */
 	  public static MapwayButton wrap(com.google.gwt.dom.client.Element element) {
 	    // Assert that the element is attached.
 	    assert Document.get().getBody().isOrHasChild(element);
