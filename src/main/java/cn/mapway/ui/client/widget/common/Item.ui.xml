@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+    .item{
+	border-bottom: solid 1px #f0f0f0;
+	}
+	.item[selected="true"]
+	{
+		background-color: #f0f0f0;
+	}
+    .name {
+        font-weight: bold;
+        color: black;
+        font-size: 14px;
+        padding: 4px 4px 2px 4px;
+        line-height: 22px;
+        height: 22px;
+        overflow: hidden;
+    }
+    
+    .summary {
+        color: #404040;
+        padding: 0px 4px 4px 4px;
+        font-size: 14px;
+    }
+    </ui:style>
+    <g:HorizontalPanel width="100%" ui:field="root" styleName="{style.item}" verticalAlignment="middle">
+        <g:cell width="45px" >
+            <g:Image ui:field="img" width="40px"> </g:Image>
+        </g:cell>
+         <g:VerticalPanel verticalAlignment="middle">
+                <g:Label ui:field="lbName" styleName="{style.name}"></g:Label>
+                <g:Label ui:field="lbSummary" styleName="{style.summary}"></g:Label>
+        </g:VerticalPanel>
+    </g:HorizontalPanel>
+
+</ui:UiBinder> 
