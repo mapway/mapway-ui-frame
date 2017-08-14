@@ -25,8 +25,8 @@
     }
     </ui:style>
     <g:HorizontalPanel width="100%" ui:field="root" styleName="{style.item}" verticalAlignment="middle">
-        <g:cell width="45px" >
-            <g:Image ui:field="img" width="40px"> </g:Image>
+        <g:cell width="35px"  horizontalAlignment="center">
+            <g:Image ui:field="img" width="30px"> </g:Image>
         </g:cell>
          <g:VerticalPanel verticalAlignment="middle">
                 <g:Label ui:field="lbName" styleName="{style.name}"></g:Label>

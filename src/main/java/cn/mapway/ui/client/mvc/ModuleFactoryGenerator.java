@@ -104,14 +104,14 @@ public class ModuleFactoryGenerator extends Generator {
     StringBuilder sb = new StringBuilder();
 
     StringBuilder sbModules = new StringBuilder();
-    sbModules.append(" private final static ModuleItem[] gModules={");
+    sbModules.append(" private final static ModuleInfo[] gModules={");
 
     int count = 0;
     for (JClassType classType : clazzes) {
       if (classType.isAbstract()) {
         continue;
       }
-      ModuleItem item = findModuleName(classType);
+      ModuleInfo item = findModuleName(classType);
       if (item == null) {
         continue;
       }
@@ -120,10 +120,10 @@ public class ModuleFactoryGenerator extends Generator {
       }
 
       if (item.icon.equals(DEFAULT_ICON)) {
-        sbModules.append("new ModuleItem(\"" + item.name + "\",\"" + item.code + "\",\""
+        sbModules.append("new ModuleInfo(\"" + item.name + "\",\"" + item.code + "\",\""
             + item.summary + "\"," + (item.isPublic ? "true" : "false") + ",DEFAULT_ICON)\r\n");
       } else {
-        sbModules.append("new ModuleItem(\"" + item.name + "\",\"" + item.code + "\",\""
+        sbModules.append("new ModuleInfo(\"" + item.name + "\",\"" + item.code + "\",\""
             + item.summary + "\"," + (item.isPublic ? "true" : "false") + ",\"" + item.icon
             + "\")\r\n");
       }
@@ -142,7 +142,7 @@ public class ModuleFactoryGenerator extends Generator {
 
     // 输出 接口 getModules();
 
-    sourceWriter.println("public ModuleItem[] getModules(){");
+    sourceWriter.println("public ModuleInfo[] getModules(){");
     sourceWriter.println("return gModules;");
     sourceWriter.println("}");
 
@@ -150,7 +150,7 @@ public class ModuleFactoryGenerator extends Generator {
     sourceWriter.println("\r\npublic boolean isModulePublic(String moduleCode){");
     sourceWriter.println("\r\n    if(moduleCode==null || moduleCode.length()==0) {return false;}");
     sourceWriter.println("\r\n    for(int i=0;i<gModules.length;i++) {\r\n");
-    sourceWriter.println("\r\n      ModuleItem item=gModules[i];");
+    sourceWriter.println("\r\n      ModuleInfo item=gModules[i];");
     sourceWriter.println("\r\n      if ( moduleCode.equals(item.code)) {\r\n");
     sourceWriter.println("\r\n          return item.isPublic;\r\n");
     sourceWriter.println("\r\n      }");
@@ -160,10 +160,10 @@ public class ModuleFactoryGenerator extends Generator {
 
     // 输出 模块信息
 
-    sourceWriter.println("\r\n public ModuleItem findModuleInfo(String moduleCode){");
+    sourceWriter.println("\r\n public ModuleInfo findModuleInfo(String moduleCode){");
     sourceWriter.println("\r\n    if(moduleCode==null || moduleCode.length()==0) {return null;}");
     sourceWriter.println("\r\n    for(int i=0;i<gModules.length;i++) {\r\n");
-    sourceWriter.println("\r\n      ModuleItem item=gModules[i];");
+    sourceWriter.println("\r\n      ModuleInfo item=gModules[i];");
     sourceWriter.println("\r\n      if ( moduleCode.equals(item.code)) {\r\n");
     sourceWriter.println("\r\n          return item;\r\n");
     sourceWriter.println("\r\n      }");
@@ -179,7 +179,7 @@ public class ModuleFactoryGenerator extends Generator {
       if (classType.isAbstract()) {
         continue;
       }
-      ModuleItem item = findModuleName(classType);
+      ModuleInfo item = findModuleName(classType);
       if (item == null) {
         continue;
 
@@ -216,7 +216,7 @@ public class ModuleFactoryGenerator extends Generator {
    * @param classType the class type
    * @return the module item
    */
-  private ModuleItem findModuleName(JClassType classType) {
+  private ModuleInfo findModuleName(JClassType classType) {
     ModuleMarker marker = classType.getAnnotation(ModuleMarker.class);
     if (marker == null) {
       return null;
@@ -242,7 +242,7 @@ public class ModuleFactoryGenerator extends Generator {
 
     icondata = loadIconData(classType, iconname);
 
-    ModuleItem item = new ModuleItem("", "", "", false, icondata);
+    ModuleInfo item = new ModuleInfo("", "", "", false, icondata);
 
     item.code = modulecode;
     item.name = modulename;

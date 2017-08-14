@@ -1,6 +1,5 @@
 package cn.mapway.ui.client.mvc;
 
-import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -19,7 +18,7 @@ public interface IModule {
    * @param parameters the parameters
    * @param context the context
    */
-  void initialize(Map<String, Object> parameters);
+  void initialize(IModule parentModule, Map<String, Object> parameters);
 
   /**
    * 卸载模块.
@@ -33,19 +32,26 @@ public interface IModule {
    */
   Widget getRootWidget();
 
+
   /**
-   * 子模块代码，返回null 或者 count=0 表示没有子模块
+   * 用于模块向父模块注册工具栏按钮
+   * 
+   * @param tools
+   */
+  void updateTools(Widget... tools);
+
+  /**
+   * 获取模块信息
    * 
    * @return
    */
-  List<ModuleItem> getSubModuleCodes();
+  ModuleInfo getModuleInfo();
 
   /**
-   * 获取模块的<b>操作</b>界面
+   * 获取模块的父模块
    * 
    * @return
    */
-  List<Widget> getTools();
-
+  IModule getParentModule();
 
 }

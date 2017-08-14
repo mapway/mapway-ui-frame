@@ -22,7 +22,7 @@ public interface ModuleFactory {
    *
    * @return the modules
    */
-  public ModuleItem[] getModules();
+  public ModuleInfo[] getModules();
 
   /**
    * 根据模块代码找到模块信息
@@ -30,7 +30,7 @@ public interface ModuleFactory {
    * @param moduleCode
    * @return
    */
-  public ModuleItem findModuleInfo(String moduleCode);
+  public ModuleInfo findModuleInfo(String moduleCode);
 
   /**
    * 模块是否是公共模块,如果没有找到模块，缺省为非公共模块

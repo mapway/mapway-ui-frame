@@ -1,6 +1,10 @@
 package cn.mapway.ui.client.modules.daywork;
 
+import java.util.Map;
+
 import cn.mapway.ui.client.mvc.AbstractModule;
+import cn.mapway.ui.client.mvc.IModule;
+import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.core.client.GWT;
@@ -8,8 +12,15 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 
-@ModuleMarker(value = "MC_DAYWORK", name = "日志模块", summary = "--==--")
+@ModuleMarker(value = DayWorkModule.MODULE_CODE, name = "日志模块", summary = "--==--")
 public class DayWorkModule extends AbstractModule {
+
+  public static final String MODULE_CODE = "MC_DAYWORK";
+
+  @Override
+  public ModuleInfo getModuleInfo() {
+    return getModuleFactory().findModuleInfo(MODULE_CODE);
+  }
 
   private static DayWorkModuleUiBinder uiBinder = GWT.create(DayWorkModuleUiBinder.class);
 
@@ -18,11 +29,15 @@ public class DayWorkModule extends AbstractModule {
 
   public DayWorkModule() {
     initWidget(uiBinder.createAndBindUi(this));
-    registerSubModule("MC_BAIDU");
-    registerSubModule("MC_SINGLE_MODULE");
 
-    registerTools(new Button("Helloe"));
-    registerTools(new Button("Helloe232"));
+  }
+
+  @Override
+  public void initialize(IModule parentModule, Map<String, Object> parameters) {
+    super.initialize(parentModule, parameters);
+    if (parentModule != null) {
+      parentModule.updateTools(new Button("Helloe"), new Button("Helloeewqeqw"));
+    }
   }
 
   @Override

@@ -6,7 +6,7 @@ package cn.mapway.ui.client.mvc;
  *
  * @author zhangjianshe
  */
-public class ModuleItem {
+public class ModuleInfo {
 
   /** The name. */
   public String name;
@@ -38,7 +38,7 @@ public class ModuleItem {
    * @param name the name
    * @param code the code
    */
-  public ModuleItem(String name, String code, String summary, boolean isPublic, String icon) {
+  public ModuleInfo(String name, String code, String summary, boolean isPublic, String icon) {
     this.name = name;
     this.code = code;
     this.isPublic = isPublic;
@@ -47,8 +47,8 @@ public class ModuleItem {
   }
 
 
-  public ModuleItem copy() {
-    ModuleItem n = new ModuleItem(name, code, summary, isPublic, icon);
+  public ModuleInfo copy() {
+    ModuleInfo n = new ModuleInfo(name, code, summary, isPublic, icon);
     return n;
   }
 
@@ -58,7 +58,7 @@ public class ModuleItem {
    * @param single
    * @return
    */
-  public ModuleItem setSingle(boolean single) {
+  public ModuleInfo setSingle(boolean single) {
     this.single = single;
     return this;
   }
