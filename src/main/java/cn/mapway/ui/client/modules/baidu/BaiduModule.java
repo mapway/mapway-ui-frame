@@ -4,7 +4,6 @@ import java.util.Map;
 
 import cn.mapway.ui.client.mvc.AbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
-import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.core.client.GWT;
@@ -25,8 +24,8 @@ public class BaiduModule extends AbstractModule {
   public static final String MODULE_CODE = "MC_BAIDU";
 
   @Override
-  public ModuleInfo getModuleInfo() {
-    return getModuleFactory().findModuleInfo(MODULE_CODE);
+  public String getModuleCode() {
+    return MODULE_CODE;
   }
 
   private static BaiduModuleUiBinder uiBinder = GWT.create(BaiduModuleUiBinder.class);

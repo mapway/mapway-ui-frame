@@ -52,4 +52,16 @@ public abstract class AbstractModule extends MessageComposite implements IModule
   public IModule getParentModule() {
     return mParentModule;
   }
+
+  @Override
+  public ModuleInfo getModuleInfo() {
+    return getModuleFactory().findModuleInfo(getModuleCode());
+  }
+
+  /**
+   * 获取模块代码
+   * 
+   * @return
+   */
+  public abstract String getModuleCode();
 }

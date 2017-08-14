@@ -1,7 +1,6 @@
 package cn.mapway.ui.client.modules.test;
 
 import cn.mapway.ui.client.frames.NavigatorModule;
-import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.core.client.GWT;
@@ -24,14 +23,13 @@ public class FuckTest extends NavigatorModule {
     initModuleContent(uiBinder.createAndBindUi(this));
   }
 
-
-
   public static final String MODULE_CODE = "MC_FUCK";
 
   @Override
-  public ModuleInfo getModuleInfo() {
-    return getModuleFactory().findModuleInfo(MODULE_CODE);
+  public String getModuleCode() {
+    return MODULE_CODE;
   }
+
 
   @UiField
   HorizontalPanel tools;

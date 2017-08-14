@@ -1,7 +1,6 @@
 package cn.mapway.ui.client.modules.test;
 
 import cn.mapway.ui.client.frames.NavigatorModule;
-import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.uibinder.client.UiChild;
@@ -17,8 +16,8 @@ public class SinglePage extends NavigatorModule {
   public static final String MODULE_CODE = "MC_SINGLE_MODULE";
 
   @Override
-  public ModuleInfo getModuleInfo() {
-    return getModuleFactory().findModuleInfo(MODULE_CODE);
+  public String getModuleCode() {
+    return MODULE_CODE;
   }
 
   Widget content;

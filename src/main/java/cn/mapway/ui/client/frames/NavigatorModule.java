@@ -249,6 +249,7 @@ public abstract class NavigatorModule extends AbstractModule implements IModuleD
 
   private void removeCurrent() {
     if (currentWidget != null) {
+      updateTools();
       currentWidget.removeFromParent();
       currentWidget = null;
     }
@@ -286,4 +287,6 @@ public abstract class NavigatorModule extends AbstractModule implements IModuleD
     assert content != null : "模块初始化必须调用 iniModuleContent 方法";
     return content;
   }
+
+
 }

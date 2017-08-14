@@ -4,7 +4,6 @@ import java.util.Map;
 
 import cn.mapway.ui.client.mvc.AbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
-import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.core.client.GWT;
@@ -55,7 +54,7 @@ public class UnAuthorityModule extends AbstractModule {
   }
 
   @Override
-  public ModuleInfo getModuleInfo() {
-    return getModuleFactory().findModuleInfo(UnAuthorityModule.MODULE_CODE);
+  public String getModuleCode() {
+    return MODULE_CODE;
   }
 }

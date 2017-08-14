@@ -24,6 +24,7 @@ public class TestEntry implements EntryPoint {
 
     RootPanel.get().add(p);
     RootPanel.get().add(con);
+    p.setSpacing(5);
 
     Button btnMul = new Button("多模块");
     p.add(btnMul);

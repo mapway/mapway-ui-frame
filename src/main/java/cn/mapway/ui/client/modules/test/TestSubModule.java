@@ -6,7 +6,6 @@ import cn.mapway.ui.client.frames.NavigatorModule;
 import cn.mapway.ui.client.modules.baidu.BaiduModule;
 import cn.mapway.ui.client.modules.daywork.DayWorkModule;
 import cn.mapway.ui.client.mvc.IModule;
-import cn.mapway.ui.client.mvc.ModuleInfo;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
 import com.google.gwt.core.client.GWT;
@@ -27,14 +26,15 @@ public class TestSubModule extends NavigatorModule {
   public static final String MODULE_CODE = "TEST_SUB_MODULE";
 
   @Override
-  public ModuleInfo getModuleInfo() {
-    return getModuleFactory().findModuleInfo(MODULE_CODE);
+  public String getModuleCode() {
+    return MODULE_CODE;
   }
 
   public TestSubModule() {
     initModuleContent(uiBinder.createAndBindUi(this));
     registerSubModule(BaiduModule.MODULE_CODE, true);
     registerSubModule(DayWorkModule.MODULE_CODE, true);
+    registerSubModule(NoToolsModule.MODULE_CODE, true);
   }
 
 
