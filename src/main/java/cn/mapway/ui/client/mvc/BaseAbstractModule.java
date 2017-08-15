@@ -12,12 +12,12 @@ import com.ksyzt.gwt.client.common.MessageComposite;
  * @author zhangjianshe
  *
  */
-public abstract class AbstractModule extends MessageComposite implements IModule {
+public abstract class BaseAbstractModule extends MessageComposite implements IModule {
 
 
   private IModule mParentModule;
 
-  public AbstractModule() {}
+  public BaseAbstractModule() {}
 
 
   private final static ModuleFactory FACTORY = GWT.create(ModuleFactory.class);
@@ -64,4 +64,9 @@ public abstract class AbstractModule extends MessageComposite implements IModule
    * @return
    */
   public abstract String getModuleCode();
+
+  public void initModuleWidget(Widget w) {
+    initWidget(w);
+  }
+
 }

@@ -4,12 +4,11 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:cn.mapway.ui.client.widget.common">
     <ui:style>
       .top{
-	border-bottom: solid 1px skyblue;
-	background-color: skyblue;
-}
- .left{
-	border-right:solid 1px skyblue;
-}
+	border-bottom: solid 1px #e0e0e0;
+	}
+	 .left{
+		border-right:solid 1px #f0f0f0;
+	}
     .name {
         font-weight: bold;
         color: black;
@@ -30,15 +29,22 @@
     }
     .img{
 	vertical-align: middle;
-}
+	}
+	.navi{
+		cursor: default;
+		color:green;
+	}
     </ui:style>
     <g:DockLayoutPanel ui:field="root">
-            <g:north size="35">
-                <g:HorizontalPanel width="100%" height="100%" spacing="0" styleName="{style.top}" verticalAlignment="middle">
+            <g:north size="34">
+                <g:HorizontalPanel ui:field="bar" width="100%" height="100%" spacing="0" styleName="{style.top}" verticalAlignment="middle">
+                        
+                        <g:Label ui:field="lbExpand" styleName="{style.navi}">◀</g:Label>        
+                        
                         <g:cell width="35px" verticalAlignment="middle">
                             <g:Image ui:field="icon" height="30px" styleName="{style.img}"></g:Image>    
                         </g:cell>
-                        <g:HorizontalPanel ui:field="tblNavi" verticalAlignment="middle">
+                        <g:HorizontalPanel ui:field="tblNavi" height="100%" verticalAlignment="middle">
                             
                         </g:HorizontalPanel>
                         <g:cell horizontalAlignment="right">
@@ -47,7 +53,7 @@
                         </g:cell>
                 </g:HorizontalPanel>
             </g:north>
-            <g:west size="300">
+            <g:west size="200">
                 <g:ScrollPanel ui:field="subModules" styleName="{style.left}">
                     <c:ItemList ui:field="subList"></c:ItemList>
                 </g:ScrollPanel>

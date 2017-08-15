@@ -36,7 +36,7 @@ public class TestEntry implements EntryPoint {
         con.add(test);
         test.setSize("800px", "600px");
         test.initialize(null, null);
-        test.switchModule("MC_DAYWORK", null);
+        test.switchModule("MC_DAYWO", null);
       }
     });
 

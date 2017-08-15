@@ -2,7 +2,7 @@ package cn.mapway.ui.client.modules.test;
 
 import java.util.Map;
 
-import cn.mapway.ui.client.frames.NavigatorModule;
+import cn.mapway.ui.client.frames.AbstractModule;
 import cn.mapway.ui.client.modules.baidu.BaiduModule;
 import cn.mapway.ui.client.modules.daywork.DayWorkModule;
 import cn.mapway.ui.client.mvc.IModule;
@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 
 @ModuleMarker(value = TestSubModule.MODULE_CODE, name = "测试子模块")
-public class TestSubModule extends NavigatorModule {
+public class TestSubModule extends AbstractModule {
 
   private static TestSubModuleUiBinder uiBinder = GWT.create(TestSubModuleUiBinder.class);
 
@@ -31,10 +31,13 @@ public class TestSubModule extends NavigatorModule {
   }
 
   public TestSubModule() {
-    initModuleContent(uiBinder.createAndBindUi(this));
+
     registerSubModule(BaiduModule.MODULE_CODE, true);
     registerSubModule(DayWorkModule.MODULE_CODE, true);
     registerSubModule(NoToolsModule.MODULE_CODE, true);
+    registerSubModule(SubWithNavi.MODULE_CODE, true);
+    registerSubModule(NoSubModule.MODULE_CODE, true);
+    initModuleWidget(uiBinder.createAndBindUi(this));
   }
 
 

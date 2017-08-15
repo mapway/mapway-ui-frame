@@ -2,7 +2,7 @@ package cn.mapway.ui.client.modules.baidu;
 
 import java.util.Map;
 
-import cn.mapway.ui.client.mvc.AbstractModule;
+import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 @ModuleMarker(value = BaiduModule.MODULE_CODE, name = "百度模块", summary = "XXXXXX", icon = "help.png")
-public class BaiduModule extends AbstractModule {
+public class BaiduModule extends BaseAbstractModule {
 
   public static final String MODULE_CODE = "MC_BAIDU";
 

@@ -2,7 +2,7 @@ package cn.mapway.ui.client.modules.daywork;
 
 import java.util.Map;
 
-import cn.mapway.ui.client.mvc.AbstractModule;
+import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 
 @ModuleMarker(value = DayWorkModule.MODULE_CODE, name = "日志模块", summary = "--==--")
-public class DayWorkModule extends AbstractModule {
+public class DayWorkModule extends BaseAbstractModule {
 
   public static final String MODULE_CODE = "MC_DAYWORK";
 

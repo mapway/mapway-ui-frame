@@ -2,7 +2,7 @@ package cn.mapway.ui.client.modules.common;
 
 import java.util.Map;
 
-import cn.mapway.ui.client.mvc.AbstractModule;
+import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
 
@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 @ModuleMarker(value = UnAuthorityModule.MODULE_CODE, name = "未经授权的模块")
-public class UnAuthorityModule extends AbstractModule {
+public class UnAuthorityModule extends BaseAbstractModule {
 
   public static final String MODULE_CODE = "SYS_UNAUTHORITY_MODULE";
 
