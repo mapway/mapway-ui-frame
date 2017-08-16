@@ -15,6 +15,7 @@ public interface IModuleDispatcher {
    * 
    * @param code
    * @param parameter
+   * @return
    */
-  void switchModule(String code, Map<String, Object> parameter);
+  IModuleDispatcher switchModule(String code, Map<String, Object> parameter, boolean saveToHistory);
 }

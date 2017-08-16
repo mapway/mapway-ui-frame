@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.mapway.ui.client.history.HistoryManager;
 import cn.mapway.ui.client.modules.common.UnAuthorityModule;
 import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
@@ -122,7 +123,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
       if (message == MessageEvent.ITEMCLICK) {
         DataHolder item = (DataHolder) value;
         ModuleInfo mi = (ModuleInfo) item.getData();
-        switchModule(mi.code, null);
+        switchModule(mi.code, null, true);
       }
     }
   };
@@ -131,7 +132,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
     @Override
     public void onClick(ClickEvent event) {
       String code = getModuleInfo().code;
-      switchModule(code, null);
+      switchModule(code, null, true);
     }
   };
 
@@ -151,8 +152,10 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
 
 
   @Override
-  public void switchModule(String code, Map<String, Object> parameter) {
+  public IModuleDispatcher switchModule(String code, Map<String, Object> parameter,
+      boolean saveToHistory) {
 
+    IModuleDispatcher d = null;
 
     if (parameter == null) {
       parameter = new HashMap<String, Object>();
@@ -186,6 +189,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
       initialize(getParentModule(), parameter);
 
       handleSubModule();
+      d = this;
     } else {
 
       ModuleInfo mi = null;
@@ -204,15 +208,21 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
         module = getModuleFactory().createModule(UnAuthorityModule.SYS_UNAUTHORITY_MODULE, true);
       } else {
         module = getModuleFactory().createModule(mi.code, true);
+
+        if (module instanceof IModuleDispatcher) {
+          d = (IModuleDispatcher) module;
+        }
+
       }
 
       // 处理导航
       holder.tblNavi.clear();
       Anchor home = new Anchor(thisModule.name);
+
       holder.tblNavi.add(home);
       home.addClickHandler(homeClicked);
 
-      holder.tblNavi.add(new HTML("&gt;"));
+      holder.tblNavi.add(new HTML("&nbsp;&gt;&nbsp;"));
       holder.tblNavi.add(new Label(mi.name));
       holder.icon.setUrl(mi.icon);
 
@@ -223,10 +233,16 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
       holder.root.add(currentWidget);
       module.initialize(this, parameter);
 
+      // 保存历史记录
+      HistoryManager.push(getModulePath(module));
+
       handleSubModule();
 
     }
+
+    return d;
   }
+
 
   private void handleSubModule() {
     // 处理子模块
@@ -235,11 +251,13 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
       holder.lbExpand.setVisible(false);
       holder.root.setWidgetSize(holder.subModules, 0);
     } else {
-      holder.subList.clear();
       holder.lbExpand.setVisible(true);
       holder.bar.setCellWidth(holder.lbExpand, "20px");
-      for (ModuleInfo item : mSubModules) {
-        holder.subList.addItem(item.name, item.summary, item.icon, item);
+      if (holder.subList.getWidgetCount() != mSubModules.size()) {
+        holder.subList.clear();
+        for (ModuleInfo item : mSubModules) {
+          holder.subList.addItem(item.name, item.summary, item.icon, item);
+        }
       }
     }
   }
@@ -276,7 +294,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
   @Override
   public void initModuleWidget(Widget widget) {
     content = widget;
-    switchModule(getModuleCode(), null);
+    switchModule(getModuleCode(), null, true);
   }
 
   @Override

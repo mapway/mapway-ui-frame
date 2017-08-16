@@ -52,4 +52,14 @@ public @interface ModuleMarker {
    */
   public String summary() default "";
 
+
+  /**
+   * 是否可以显示在界面上.
+   * 
+   * @return
+   */
+  public boolean visible() default true;
+
+
+
 }

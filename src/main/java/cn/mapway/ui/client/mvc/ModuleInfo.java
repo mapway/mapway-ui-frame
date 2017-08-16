@@ -33,22 +33,32 @@ public class ModuleInfo {
   public Boolean single;
 
   /**
+   * 模块Hash值
+   */
+  public String hash;
+
+  public boolean isVisible;
+
+  /**
    * Instantiates a new module item.
    *
    * @param name the name
    * @param code the code
    */
-  public ModuleInfo(String name, String code, String summary, boolean isPublic, String icon) {
+  public ModuleInfo(String name, String code, String summary, boolean isPublic, String icon,
+      String hash, boolean visible) {
     this.name = name;
     this.code = code;
     this.isPublic = isPublic;
     this.icon = icon;
     this.summary = summary;
+    this.hash = hash;
+    this.isVisible = visible;
   }
 
 
   public ModuleInfo copy() {
-    ModuleInfo n = new ModuleInfo(name, code, summary, isPublic, icon);
+    ModuleInfo n = new ModuleInfo(name, code, summary, isPublic, icon, hash, isVisible);
     return n;
   }
 

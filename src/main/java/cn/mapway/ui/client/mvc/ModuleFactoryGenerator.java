@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nutz.lang.Files;
+import org.nutz.lang.Lang;
 import org.nutz.repo.Base64;
 
 import com.google.gwt.core.ext.Generator;
@@ -26,10 +27,10 @@ import com.google.gwt.user.rebind.SourceWriter;
 public class ModuleFactoryGenerator extends Generator {
 
   private static final String DEFAULT_ICON =
-      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABEklEQVR4Xu2XsRGDQAwEjz5cCDNuw4HbcFVOKNIJJOYD7hWIkdaRg9cI7Z/uYFHz39J8fgEABTQnwAo0FwAmyAqwAs0JsALNBWClwFPSZwLYa6/Jrh8+urMCb0nfCQBHj+x6AIwIoABD0tkSjvZnBViBAQE8AA+4TiBqQtn1mCAmiAmeCZAC1z1Q2SYW7Y8JRk3wIWk1FHMc3fY/2fVhBUzMfv8SxwTvP83EEzoAoiaUXR9egewBov0BEE2B6A1k16MAFMDHEB9DJwK8BxgvT9kuHu1PCpACpAApQAr8EyAGjRgsedRRAAAqEkABFW/VmQkFOLQqnkUBFW/VmQkFOLQqnkUBFW/VmQkFOLQqnm2vgB/ajWNBbfOCCQAAAABJRU5ErkJggg==";
+      "data:image/png;base64,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";
 
   /*
-   * (non-Javadoc)
+   * 11 (non-Javadoc)
    * 
    * @see com.google.gwt.core.ext.Generator#generate(com.google.gwt.core.ext.TreeLogger,
    * com.google.gwt.core.ext.GeneratorContext, java.lang.String)
@@ -121,13 +122,13 @@ public class ModuleFactoryGenerator extends Generator {
 
       if (item.icon.equals(DEFAULT_ICON)) {
         sbModules.append("new ModuleInfo(\"" + item.name + "\",\"" + item.code + "\",\""
-            + item.summary + "\"," + (item.isPublic ? "true" : "false") + ",DEFAULT_ICON)\r\n");
+            + item.summary + "\"," + (item.isPublic ? "true" : "false") + ",DEFAULT_ICON,\""
+            + item.hash + "\"," + item.isVisible + ")\r\n");
       } else {
         sbModules.append("new ModuleInfo(\"" + item.name + "\",\"" + item.code + "\",\""
             + item.summary + "\"," + (item.isPublic ? "true" : "false") + ",\"" + item.icon
-            + "\")\r\n");
+            + "\",\"" + item.hash + "\"," + item.isVisible + ")\r\n");
       }
-
 
       sb.append("\r\n\t private static IModule " + item.code + "=null;\r\n");
 
@@ -160,6 +161,17 @@ public class ModuleFactoryGenerator extends Generator {
 
     // 输出 模块信息
 
+    sourceWriter.println("\r\n public ModuleInfo findModuleInfoByHash(String hash){");
+    sourceWriter.println("\r\n    if(hash==null || hash.length()==0) {return null;}");
+    sourceWriter.println("\r\n    for(int i=0;i<gModules.length;i++) {\r\n");
+    sourceWriter.println("\r\n      ModuleInfo item=gModules[i];");
+    sourceWriter.println("\r\n      if ( hash.equals(item.hash)) {\r\n");
+    sourceWriter.println("\r\n          return item;\r\n");
+    sourceWriter.println("\r\n      }");
+    sourceWriter.println("\r\n    }");
+    sourceWriter.println("\r\n    return null;\r\n");
+    sourceWriter.println("\r\n}");
+
     sourceWriter.println("\r\n public ModuleInfo findModuleInfo(String moduleCode){");
     sourceWriter.println("\r\n    if(moduleCode==null || moduleCode.length()==0) {return null;}");
     sourceWriter.println("\r\n    for(int i=0;i<gModules.length;i++) {\r\n");
@@ -170,6 +182,7 @@ public class ModuleFactoryGenerator extends Generator {
     sourceWriter.println("\r\n    }");
     sourceWriter.println("\r\n    return null;\r\n");
     sourceWriter.println("\r\n}");
+
     // 实例化签名
     sourceWriter.println("public  IModule createModule( String code ,boolean single) {");
 
@@ -225,11 +238,13 @@ public class ModuleFactoryGenerator extends Generator {
     String modulename = null;
     String summary = "";
     boolean isPublic = false;
+    boolean isVisible = true;
     if (marker != null) {
       modulecode = marker.value();
       modulename = marker.name();
       isPublic = marker.isPublic();
       summary = marker.summary();
+      isVisible = marker.visible();
     }
     if (modulecode == null || modulecode.length() == 0) {
       modulecode = classType.getSimpleSourceName();
@@ -242,12 +257,15 @@ public class ModuleFactoryGenerator extends Generator {
 
     icondata = loadIconData(classType, iconname);
 
-    ModuleInfo item = new ModuleInfo("", "", "", false, icondata);
+    ModuleInfo item = new ModuleInfo("", "", "", false, icondata, "", false);
 
     item.code = modulecode;
     item.name = modulename;
     item.isPublic = isPublic;
     item.summary = summary;
+    String md5 = Lang.md5(item.code);
+    item.hash = md5.substring(md5.length() - 6);
+    item.isVisible = isVisible;
     return item;
   }
 

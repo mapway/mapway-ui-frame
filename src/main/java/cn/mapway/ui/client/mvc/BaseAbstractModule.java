@@ -1,5 +1,7 @@
 package cn.mapway.ui.client.mvc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
@@ -27,7 +29,7 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
    * 
    * @return
    */
-  public ModuleFactory getModuleFactory() {
+  public static ModuleFactory getModuleFactory() {
     return FACTORY;
   }
 
@@ -45,7 +47,9 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
 
   @Override
   public void updateTools(Widget... tools) {
-
+    if (mParentModule != null) {
+      mParentModule.updateTools(tools);
+    }
   }
 
   @Override
@@ -67,6 +71,34 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
 
   public void initModuleWidget(Widget w) {
     initWidget(w);
+
   }
+
+  @Override
+  public Widget getRootWidget() {
+    return this;
+  }
+
+  private List<IModule> getModuleStack(IModule module) {
+    List<IModule> modules = new ArrayList<IModule>();
+
+    IModule p = module;
+    while (p != null) {
+      modules.add(p);
+      p = p.getParentModule();
+    }
+    return modules;
+  }
+
+  public String[] getModulePath(IModule module) {
+    List<IModule> modules = getModuleStack(module);
+    String[] ms = new String[modules.size()];
+    int index = modules.size() - 1;
+    for (IModule m : modules) {
+      ms[index--] = m.getModuleInfo().hash;
+    }
+    return ms;
+  }
+
 
 }

@@ -108,6 +108,7 @@ public class ItemList extends HTMLPanel implements HasMessageHandlers {
         mSelected.setSelected(true);
       }
       if (fired) {
+
         MessageEvent ev = new MessageEvent(MessageEvent.ITEMCLICK, item);
         fireEvent(ev);
       }

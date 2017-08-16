@@ -33,10 +33,21 @@ public interface ModuleFactory {
   public ModuleInfo findModuleInfo(String moduleCode);
 
   /**
+   * 根据模块哈希找到模块信息
+   * 
+   * @param moduleCode
+   * @return
+   */
+  public ModuleInfo findModuleInfoByHash(String hash);
+
+  /**
    * 模块是否是公共模块,如果没有找到模块，缺省为非公共模块
    * 
    * @param moduleCode
    * @return true/false
    */
   public boolean isModulePublic(String moduleCode);
+
+
+
 }
