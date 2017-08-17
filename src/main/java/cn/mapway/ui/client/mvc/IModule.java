@@ -1,7 +1,5 @@
 package cn.mapway.ui.client.mvc;
 
-import java.util.Map;
-
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -18,7 +16,7 @@ public interface IModule {
    * @param parameters the parameters
    * @param context the context
    */
-  void initialize(IModule parentModule, Map<String, Object> parameters);
+  void initialize(IModule parentModule, ModuleParameter parameters);
 
   /**
    * 卸载模块.
@@ -53,5 +51,12 @@ public interface IModule {
    * @return
    */
   IModule getParentModule();
+
+  /**
+   * 获取模块参数.
+   * 
+   * @return
+   */
+  ModuleParameter getParameters();
 
 }

@@ -3,9 +3,7 @@ package cn.mapway.ui.client.frames;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import cn.mapway.ui.client.history.HistoryManager;
 import cn.mapway.ui.client.modules.common.UnAuthorityModule;
@@ -13,6 +11,7 @@ import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.IModuleDispatcher;
 import cn.mapway.ui.client.mvc.ModuleInfo;
+import cn.mapway.ui.client.mvc.ModuleParameter;
 import cn.mapway.ui.client.widget.common.DataHolder;
 import cn.mapway.ui.client.widget.common.ItemList;
 
@@ -152,13 +151,13 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
 
 
   @Override
-  public IModuleDispatcher switchModule(String code, Map<String, Object> parameter,
+  public IModuleDispatcher switchModule(String code, ModuleParameter parameter,
       boolean saveToHistory) {
 
     IModuleDispatcher d = null;
 
     if (parameter == null) {
-      parameter = new HashMap<String, Object>();
+      parameter = new ModuleParameter();
     }
 
     // 两种情况 本模块 或者 子模块

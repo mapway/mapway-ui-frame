@@ -1,10 +1,9 @@
 package cn.mapway.ui.client.modules.baidu;
 
-import java.util.Map;
-
 import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
+import cn.mapway.ui.client.mvc.ModuleParameter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -57,7 +56,7 @@ public class BaiduModule extends BaseAbstractModule {
   }
 
   @Override
-  public void initialize(IModule parentModule, Map<String, Object> parameters) {
+  public void initialize(IModule parentModule, ModuleParameter parameters) {
     super.initialize(parentModule, parameters);
     if (parentModule != null) {
       parentModule.updateTools(new Button("Back"));

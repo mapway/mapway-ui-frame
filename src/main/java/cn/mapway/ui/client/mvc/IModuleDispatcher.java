@@ -1,6 +1,5 @@
 package cn.mapway.ui.client.mvc;
 
-import java.util.Map;
 
 /**
  * 模块调度器
@@ -17,5 +16,5 @@ public interface IModuleDispatcher {
    * @param parameter
    * @return
    */
-  IModuleDispatcher switchModule(String code, Map<String, Object> parameter, boolean saveToHistory);
+  IModuleDispatcher switchModule(String code, ModuleParameter parameter, boolean saveToHistory);
 }

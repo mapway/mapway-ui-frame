@@ -2,7 +2,6 @@ package cn.mapway.ui.client.mvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
@@ -18,6 +17,7 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
 
 
   private IModule mParentModule;
+  private ModuleParameter mParameter;
 
   public BaseAbstractModule() {}
 
@@ -34,7 +34,10 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
   }
 
   @Override
-  public void initialize(IModule parentModule, Map<String, Object> parameters) {
+  public void initialize(IModule parentModule, ModuleParameter parameter) {
+    if (parameter == null) {
+      mParameter = new ModuleParameter();
+    }
     mParentModule = parentModule;
   }
 
@@ -80,8 +83,8 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
   }
 
   private List<IModule> getModuleStack(IModule module) {
-    List<IModule> modules = new ArrayList<IModule>();
 
+    List<IModule> modules = new ArrayList<IModule>();
     IModule p = module;
     while (p != null) {
       modules.add(p);
@@ -90,15 +93,23 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
     return modules;
   }
 
-  public String[] getModulePath(IModule module) {
+  public List<SwitchModuleData> getModulePath(IModule module) {
+
+    List<SwitchModuleData> r = new ArrayList<SwitchModuleData>();
+
     List<IModule> modules = getModuleStack(module);
-    String[] ms = new String[modules.size()];
-    int index = modules.size() - 1;
+
     for (IModule m : modules) {
-      ms[index--] = m.getModuleInfo().hash;
+      ModuleInfo info = m.getModuleInfo();
+      SwitchModuleData d = new SwitchModuleData(info.code, info.hash);
+      d.setParameters(m.getParameters());
+      r.add(0, d);
     }
-    return ms;
+    return r;
   }
 
-
+  @Override
+  public ModuleParameter getParameters() {
+    return mParameter;
+  }
 }

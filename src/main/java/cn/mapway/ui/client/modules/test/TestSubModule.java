@@ -1,12 +1,11 @@
 package cn.mapway.ui.client.modules.test;
 
-import java.util.Map;
-
 import cn.mapway.ui.client.frames.AbstractModule;
 import cn.mapway.ui.client.modules.baidu.BaiduModule;
 import cn.mapway.ui.client.modules.daywork.DayWorkModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
+import cn.mapway.ui.client.mvc.ModuleParameter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -43,7 +42,7 @@ public class TestSubModule extends AbstractModule {
 
 
   @Override
-  public void initialize(IModule parentModule, Map<String, Object> parameters) {
+  public void initialize(IModule parentModule, ModuleParameter parameters) {
     super.initialize(parentModule, parameters);
     TextBox t = new TextBox();
     updateTools(t);

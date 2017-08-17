@@ -1,10 +1,9 @@
 package cn.mapway.ui.client.modules.daywork;
 
-import java.util.Map;
-
 import cn.mapway.ui.client.mvc.BaseAbstractModule;
 import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
+import cn.mapway.ui.client.mvc.ModuleParameter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -32,7 +31,7 @@ public class DayWorkModule extends BaseAbstractModule {
   }
 
   @Override
-  public void initialize(IModule parentModule, Map<String, Object> parameters) {
+  public void initialize(IModule parentModule, ModuleParameter parameters) {
     super.initialize(parentModule, parameters);
     if (parentModule != null) {
       parentModule.updateTools(new Button("Helloe"), new Button("Helloeewqeqw"));
