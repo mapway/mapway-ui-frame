@@ -37,6 +37,7 @@ public class TestSubModule extends AbstractModule {
     registerSubModule(NoToolsModule.MODULE_CODE, true);
     registerSubModule(SubWithNavi.MODULE_CODE, true);
     registerSubModule(NoSubModule.MODULE_CODE, true);
+    registerSubModule(ItemTest.MODULE_CODE, true);
     initModuleWidget(uiBinder.createAndBindUi(this));
   }
 
