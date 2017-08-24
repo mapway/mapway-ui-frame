@@ -32,6 +32,13 @@ public class HistoryManager implements ValueChangeHandler<String> {
     }
   }
 
+
+  public final static void pushParameters(List<SwitchModuleData> moduleDatas) {
+    encode(moduleDatas);
+  }
+
+
+
   private static HistoryManager historyManager = null;
 
   public final static HistoryManager get(IModuleDispatcher dispatcher) {
@@ -58,13 +65,10 @@ public class HistoryManager implements ValueChangeHandler<String> {
         }
         SwitchModuleData moduelData = modules.get(index++);
 
-        GWT.log("popup hash>" + moduelData.getModuleCode());
+        GWT.log("popup hash > " + moduelData.getModuleCode() + "  "
+            + moduelData.getParameters().toString());
+        d = d.switchModule(moduelData.getModuleCode(), moduelData.getParameters(), false);
 
-        ModuleInfo info =
-            BaseAbstractModule.getModuleFactory().findModuleInfoByHash(moduelData.getHash());
-        if (info != null) {
-          d = d.switchModule(info.code, moduelData.getParameters(), false);
-        }
       }
     }
   }
@@ -78,15 +82,16 @@ public class HistoryManager implements ValueChangeHandler<String> {
     for (SwitchModuleData d : moduleCodes) {
       if (r.length() > 0) {
         r += ":";
-        data += "|";
+        data += "`";
       }
-      r += d.getModuleCode();
+      r += d.getHash();
       data += d.getParameters().toString();
     }
     // 保存参数到本地存储中.
     Storage storage = Storage.getLocalStorageIfSupported();
     if (storage != null) {
       storage.setItem(r, data);
+      GWT.log("push local(" + r + ">" + data);
     }
     return r;
   }
@@ -101,9 +106,9 @@ public class HistoryManager implements ValueChangeHandler<String> {
 
     List<SwitchModuleData> r = new ArrayList<SwitchModuleData>();
 
-    if (token == null || token.length() == 0) {
+    if (token != null && token.length() > 0) {
       String[] hashs = token.split(":");
-      String[] paras = data.split("|");
+      String[] paras = data.split("`");
 
       for (int i = 0; i < hashs.length; i++) {
         ModuleInfo mi = BaseAbstractModule.getModuleFactory().findModuleInfoByHash(hashs[i]);

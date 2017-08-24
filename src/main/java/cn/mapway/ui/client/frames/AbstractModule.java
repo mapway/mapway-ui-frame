@@ -122,7 +122,9 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
       if (message == MessageEvent.ITEMCLICK) {
         DataHolder item = (DataHolder) value;
         ModuleInfo mi = (ModuleInfo) item.getData();
-        switchModule(mi.code, null, true);
+        ModuleParameter mp = new ModuleParameter();
+        beforeSwitchSubModule(mi, mp);
+        switchModule(mi.code, mp, true);
       }
     }
   };
@@ -301,5 +303,14 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
     return this;
   }
 
+  /**
+   * 子类需要重载这个方法，提供子模块切换的参数
+   * 
+   * @param mi
+   * @param mp
+   */
+  public void beforeSwitchSubModule(ModuleInfo mi, ModuleParameter mp) {
+
+  }
 
 }

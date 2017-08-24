@@ -37,6 +37,8 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
   public void initialize(IModule parentModule, ModuleParameter parameter) {
     if (parameter == null) {
       mParameter = new ModuleParameter();
+    } else {
+      mParameter = parameter;
     }
     mParentModule = parentModule;
   }
@@ -74,7 +76,6 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
 
   public void initModuleWidget(Widget w) {
     initWidget(w);
-
   }
 
   @Override
@@ -112,4 +113,6 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
   public ModuleParameter getParameters() {
     return mParameter;
   }
+
+
 }

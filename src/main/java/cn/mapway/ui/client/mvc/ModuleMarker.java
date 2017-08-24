@@ -60,6 +60,11 @@ public @interface ModuleMarker {
    */
   public boolean visible() default true;
 
-
+  /**
+   * 模块分组信息.
+   * 
+   * @return
+   */
+  public String group() default "/";
 
 }

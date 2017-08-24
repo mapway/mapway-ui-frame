@@ -34,6 +34,7 @@ public class SwitchModuleData {
 
   public SwitchModuleData(String code, String hash) {
     this.moduleCode = code;
+    this.hash = hash;
     this.paras = new ModuleParameter();
   }
 

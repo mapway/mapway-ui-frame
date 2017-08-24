@@ -40,6 +40,11 @@ public class ModuleInfo {
   public boolean isVisible;
 
   /**
+   * 模块分组信息
+   */
+  public String group;
+
+  /**
    * Instantiates a new module item.
    *
    * @param name the name

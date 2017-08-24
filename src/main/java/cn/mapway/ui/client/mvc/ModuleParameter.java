@@ -55,10 +55,11 @@ public class ModuleParameter {
   public String toString() {
     String r = "";
     for (Entry<String, Object> item : paras.entrySet()) {
-      r += item.getKey() + ":" + item.getValue().toString();
       if (r.length() > 0) {
         r += ",";
       }
+      r += item.getKey() + "|" + item.getValue().toString();
+
     }
     return r;
   }
@@ -77,7 +78,7 @@ public class ModuleParameter {
       if (item.length() == 0) {
         continue;
       }
-      String[] kv = item.split(";");
+      String[] kv = item.split("\\|");
       if (kv.length != 2) {
         continue;
       }
