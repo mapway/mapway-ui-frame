@@ -148,6 +148,24 @@ table td , div , button{
     padding-left: 7px;
 }
 
+.getEx-Label-Link{
+	color:#337ab7;
+	text-align: left;
+	position: relative;
+	min-height: 1px;
+    padding-top: 7px;
+    padding-left: 7px;
+    cursor: pointer;
+}
+
+.gwtEx-left{
+	float: left;
+}
+
+.gwtEx-right{
+	float: right;
+}
+
 .gwtEx-CheckBox{
 	height: 34px;
     line-height: 34px;
@@ -234,13 +252,14 @@ table td , div , button{
 
 @media ( min-width :992px) {
 	.gwtEx-group{
-		display: flex;
 		clear: both;
 		margin-bottom: 15px;
+		display: flex;
 	}
 	.gwtEx-width-1, .gwtEx-width-2, .gwtEx-width-3, .gwtEx-width-4, .gwtEx-width-5, .gwtEx-width-6,
 		.gwtEx-width-7, .gwtEx-width-8, .gwtEx-width-9, .gwtEx-width-10, .gwtEx-width-11, .gwtEx-width-12 {
-		float: left
+		float: left;
+		box-sizing:border-box;
 	}
 	.gwtEx-width-12 {
 		width: 100%
@@ -320,6 +339,71 @@ table td , div , button{
     font-weight: bold;
 }
 
+.gwtEx-DashBoard{
+	margin: 15px;
+    box-sizing: border-box;
+    position: relative;
+    height: auto;
+    zoom: 1;
+    display: block;
+	clear: both;    
+}
+
+.gwtEx-DashBoard-item{
+	height: 270px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 6px;
+    background-color: #fff;
+}
+
+.gwtEx-DashBoard-item:HOVER{
+	border: 3px solid skyblue;
+}
+
+.gwtEx-DashBoard-item-top{
+	display: flow-root;
+    clear: both;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 6px 10px;
+}
+
+.gwtEx-DashBoard-item-top .gwtEx-Label{
+	color: #777;
+}
+
+.gwtEx-DashBoard-item-center{
+	padding: 6px 10px;
+}
+
+.gwtEx-DashBoard-item-1 , .gwtEx-DashBoard-item-2 , .gwtEx-DashBoard-item-3 , .gwtEx-DashBoard-item-4{
+	float: left;
+	margin-left:0.5%;
+    margin-right: 0.5%;
+    margin-top:6px;
+    box-sizing:border-box;
+}
+
+.gwtEx-DashBoard-item-1{
+	width: 24%;
+}
+
+.gwtEx-DashBoard-item-2{
+	width: 49%;
+}
+
+.gwtEx-DashBoard-item-3{
+	width: 74%;
+}
+
+.gwtEx-DashBoard-item-4{
+	width: 99%;
+}
+
+/*---------- enn end ------------------*/
+
 .gwt-DecoratorPanel {
 }
 .gwt-DecoratorPanel .topCenter,
@@ -351,13 +435,6 @@ table td , div , button{
   background: url(images/corner.png) no-repeat -5px -5px;
 }
 
-.gwt-DialogBox .Caption {
-  background: #ebebeb url(images/hborder.png) repeat-x 0px -2003px;
-  padding: 4px 4px 4px 8px;
-  cursor: default;
-  border-bottom: 1px solid #bbbbbb;
-  border-top: 5px solid #e3e3e3;
-}
 .gwt-DialogBox .dialogContent {
 }
 .gwt-DialogBox .dialogMiddleCenter {

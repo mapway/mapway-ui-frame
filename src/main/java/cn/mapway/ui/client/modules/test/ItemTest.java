@@ -57,7 +57,7 @@ public class ItemTest extends AbstractModule {
 		listBox.addItem("小紫", "5");
 		listBox.addItem("小灰", "6");
 		
-		image.setUrl("avatar11.png");
+		image.setUrl("static/images/timg.jpg");
 		
 		initTable();
 		
