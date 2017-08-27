@@ -133,7 +133,8 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
     @Override
     public void onClick(ClickEvent event) {
       String code = getModuleInfo().code;
-      switchModule(code, null, true);
+      switchModule(code, getParameters(), true);
+      initialize(getParentModule(), getParameters());
     }
   };
 
@@ -151,6 +152,25 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
   IModule current;
 
 
+  @Override
+  public boolean initialize(IModule parentModule, ModuleParameter parameters) {
+    super.initialize(parentModule, parameters);
+    if (parameters != null && parameters.getSubModule().length() > 0) {
+      switchModule(parameters.getSubModule(), null, false);
+      boolean isThisModule = false;
+      ModuleInfo thisModule = getModuleInfo();
+      if (thisModule.code.equals(parameters.getSubModule())) {
+        isThisModule = true;
+      }
+
+      if (isThisModule) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
 
   @Override
   public IModuleDispatcher switchModule(String code, ModuleParameter parameter,
@@ -187,8 +207,6 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
         currentWidget = new Label("没有模块主内容");
       }
       holder.root.add(currentWidget);
-      initialize(getParentModule(), parameter);
-
       handleSubModule();
       d = this;
     } else {
@@ -209,7 +227,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
         module = getModuleFactory().createModule(UnAuthorityModule.SYS_UNAUTHORITY_MODULE, true);
       } else {
         module = getModuleFactory().createModule(mi.code, true);
-
+        syncSubModuleList(mi.code);
         if (module instanceof IModuleDispatcher) {
           d = (IModuleDispatcher) module;
         }
@@ -295,6 +313,7 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
   @Override
   public void initModuleWidget(Widget widget) {
     content = widget;
+    handleSubModule();
     switchModule(getModuleCode(), null, true);
   }
 
@@ -311,6 +330,33 @@ public abstract class AbstractModule extends BaseAbstractModule implements IModu
    */
   public void beforeSwitchSubModule(ModuleInfo mi, ModuleParameter mp) {
 
+  }
+
+  /**
+   * 同步子模块列表的选中状态
+   * 
+   * @param moduleCode
+   */
+  private void syncSubModuleList(String moduleCode) {
+    for (int i = 0; i < holder.subList.getWidgetCount(); i++) {
+      DataHolder item = (DataHolder) holder.subList.getWidget(i);
+      ModuleInfo mi = (ModuleInfo) item.getData();
+      if (mi.code.equals(moduleCode)) {
+        holder.subList.setSelected(i, true, false);
+        break;
+      }
+    }
+  }
+
+  private void fireModuleCodeClicked(String moduleCode) {
+    for (int i = 0; i < holder.subList.getWidgetCount(); i++) {
+      DataHolder item = (DataHolder) holder.subList.getWidget(i);
+      ModuleInfo mi = (ModuleInfo) item.getData();
+      if (mi.code.equals(moduleCode)) {
+        holder.subList.setSelected(i, true, true);
+        break;
+      }
+    }
   }
 
 }

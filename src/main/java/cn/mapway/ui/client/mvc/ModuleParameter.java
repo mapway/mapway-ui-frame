@@ -16,6 +16,7 @@ public class ModuleParameter {
    * 通用参数，用于从数据库中的参数传递到模块中.
    */
   public final static String PARA_KEY = "para_key";
+  private String subModule = "";
   private Map<String, Object> paras;
 
   public ModuleParameter() {
@@ -29,6 +30,20 @@ public class ModuleParameter {
    */
   public void put(Object value) {
     put(PARA_KEY, value);
+  }
+
+  /**
+   * 获取子模块
+   * 
+   * @return
+   */
+  public String getSubModule() {
+    return subModule;
+  }
+
+
+  public void setSubModule(String moduleCode) {
+    subModule = moduleCode;
   }
 
   /**

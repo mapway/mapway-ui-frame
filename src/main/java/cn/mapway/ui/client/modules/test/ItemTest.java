@@ -1,9 +1,7 @@
 package cn.mapway.ui.client.modules.test;
 
 import cn.mapway.ui.client.frames.AbstractModule;
-import cn.mapway.ui.client.mvc.IModule;
 import cn.mapway.ui.client.mvc.ModuleMarker;
-import cn.mapway.ui.client.mvc.ModuleParameter;
 import cn.mapway.ui.client.widget.common.ButtonEx;
 import cn.mapway.ui.client.widget.common.DangerButton;
 import cn.mapway.ui.client.widget.common.GridEx;
@@ -56,7 +54,7 @@ public class ItemTest extends AbstractModule {
     listBox.addItem("小紫", "5");
     listBox.addItem("小灰", "6");
 
-    image.setUrl("static/images/timg.jpg");
+    image.setUrl("../images/timg.jpg");
 
     initTable();
 
@@ -71,10 +69,6 @@ public class ItemTest extends AbstractModule {
     return MODULE_CODE;
   }
 
-  @Override
-  public void initialize(IModule parentModule, ModuleParameter parameters) {
-    super.initialize(parentModule, parameters);
-  }
 
   @UiField
   TextBoxEx shuru;

@@ -34,13 +34,14 @@ public abstract class BaseAbstractModule extends MessageComposite implements IMo
   }
 
   @Override
-  public void initialize(IModule parentModule, ModuleParameter parameter) {
+  public boolean initialize(IModule parentModule, ModuleParameter parameter) {
     if (parameter == null) {
       mParameter = new ModuleParameter();
     } else {
       mParameter = parameter;
     }
     mParentModule = parentModule;
+    return true;
   }
 
   @Override

@@ -15,8 +15,9 @@ public interface IModule {
    *
    * @param parameters the parameters
    * @param context the context
+   * @return true 表示可以初始化本模块，false表示已经初始化子模块了，本模块可以不用初始化
    */
-  void initialize(IModule parentModule, ModuleParameter parameters);
+  boolean initialize(IModule parentModule, ModuleParameter parameters);
 
   /**
    * 卸载模块.

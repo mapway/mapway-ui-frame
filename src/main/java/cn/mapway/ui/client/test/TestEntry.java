@@ -2,8 +2,10 @@ package cn.mapway.ui.client.test;
 
 import cn.mapway.ui.client.history.HistoryManager;
 import cn.mapway.ui.client.modules.test.FuckTest;
+import cn.mapway.ui.client.modules.test.NoSubModule;
 import cn.mapway.ui.client.modules.test.TestSubModule;
 import cn.mapway.ui.client.mvc.IModuleDispatcher;
+import cn.mapway.ui.client.mvc.ModuleParameter;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -60,6 +62,35 @@ public class TestEntry implements EntryPoint {
         con.add(dingle);
         dingle.setSize("800px", "600px");
         dingle.initialize(null, null);
+      }
+    });
+
+    Button btnMul3 = new Button("定位多磨扩的子模块");
+    p.add(btnMul3);
+    btnMul3.addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(ClickEvent event) {
+        con.clear();
+        con.add(test);
+        dingle.setSize("800px", "600px");
+        ModuleParameter mp = new ModuleParameter();
+        mp.setSubModule(NoSubModule.MODULE_CODE);
+        test.initialize(null, mp);
+      }
+    });
+
+    Button btnMul4 = new Button("定位多磨扩的主模块");
+    p.add(btnMul4);
+    btnMul4.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        con.clear();
+        con.add(test);
+        dingle.setSize("800px", "600px");
+        ModuleParameter mp = new ModuleParameter();
+        mp.setSubModule(TestSubModule.MODULE_CODE);
+        test.initialize(null, mp);
       }
     });
   }

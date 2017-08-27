@@ -40,7 +40,7 @@ public class UnAuthorityModule extends BaseAbstractModule {
   public static final String PARA_MODULE_NAME = "ModuelName";
 
   @Override
-  public void initialize(IModule parentModule, ModuleParameter parameters) {
+  public boolean initialize(IModule parentModule, ModuleParameter parameters) {
     super.initialize(parentModule, parameters);
 
     String moduelName = (String) parameters.get(PARA_MODULE_NAME);
@@ -49,7 +49,7 @@ public class UnAuthorityModule extends BaseAbstractModule {
     } else {
       lbModuelName.setText("Unknown");
     }
-
+    return true;
   }
 
   @Override

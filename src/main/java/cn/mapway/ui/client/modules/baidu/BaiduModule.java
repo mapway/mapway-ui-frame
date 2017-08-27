@@ -56,11 +56,12 @@ public class BaiduModule extends BaseAbstractModule {
   }
 
   @Override
-  public void initialize(IModule parentModule, ModuleParameter parameters) {
-    super.initialize(parentModule, parameters);
+  public boolean initialize(IModule parentModule, ModuleParameter parameters) {
+    boolean b = super.initialize(parentModule, parameters);
     if (parentModule != null) {
       parentModule.updateTools(new Button("Back"));
     }
+    return b;
   }
 
   @Override

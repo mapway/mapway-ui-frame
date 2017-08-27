@@ -44,9 +44,13 @@ public class TestSubModule extends AbstractModule {
 
 
   @Override
-  public void initialize(IModule parentModule, ModuleParameter parameters) {
-    super.initialize(parentModule, parameters);
-    TextBox t = new TextBox();
-    updateTools(t);
+  public boolean initialize(IModule parentModule, ModuleParameter parameters) {
+    boolean b = super.initialize(parentModule, parameters);
+
+    if (b) {
+      TextBox t = new TextBox();
+      updateTools(t);
+    }
+    return b;
   }
 }
