@@ -10,6 +10,9 @@
 	<g:ScrollPanel>
 		<g:HTMLPanel width="100%">
 			<g:HTMLPanel styleName="gwtEx-group">
+				<g:MenuBar ui:field="menu"></g:MenuBar>
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="gwtEx-group">
 				<c:LabelEx styleName="gwtEx-Label gwtEx-width-2" ui:field="label">请输入</c:LabelEx>
 				<g:HTMLPanel styleName="gwtEx-width-7">
 					<c:TextBoxEx ui:field="shuru"></c:TextBoxEx>

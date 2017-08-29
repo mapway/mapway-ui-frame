@@ -3,6 +3,7 @@ package cn.mapway.ui.client.modules.test;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -12,6 +13,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 
 import cn.mapway.ui.client.frames.AbstractModule;
@@ -29,11 +32,11 @@ import cn.mapway.ui.client.widget.common.TabBarEx;
 import cn.mapway.ui.client.widget.common.TableEx;
 import cn.mapway.ui.client.widget.common.TextBoxEx;
 
-@ModuleMarker(value = ItemTest.MODULE_CODE, name = "組件測試" , icon="avatar11.png")
+@ModuleMarker(value = ItemTest.MODULE_CODE, name = "組件測試", icon = "avatar11.png")
 public class ItemTest extends AbstractModule {
 
 	private static ItemTestUiBinder uiBinder = GWT.create(ItemTestUiBinder.class);
-	
+
 	public static final String MODULE_CODE = "ITEM_TEST";
 
 	interface ItemTestUiBinder extends UiBinder<Widget, ItemTest> {
@@ -41,14 +44,14 @@ public class ItemTest extends AbstractModule {
 
 	public ItemTest() {
 		initModuleWidget(uiBinder.createAndBindUi(this));
-		
+
 		shuru.setPlaceHolder("请输入你的梦想");
 		btn.setData("理想的状态");
 		btn.addClickHandler(btnHandler);
-		
+
 		primaryBtn.setData("草长莺飞");
 		primaryBtn.addClickHandler(primaryBtnHandler);
-		
+
 		listBox.clear();
 		listBox.addItem("小红", "1");
 		listBox.addItem("小绿", "2");
@@ -56,133 +59,123 @@ public class ItemTest extends AbstractModule {
 		listBox.addItem("小黄", "4");
 		listBox.addItem("小紫", "5");
 		listBox.addItem("小灰", "6");
-		
+
 		image.setUrl("static/images/timg.jpg");
-		
+
 		initTable();
-		
+
 		initTab();
-		
+
 		initGrid();
-		
+
+		initMenu();
+
 	}
 
 	@Override
 	public String getModuleCode() {
 		return MODULE_CODE;
 	}
-	
+
 	@Override
 	public void initialize(IModule parentModule, Map<String, Object> parameters) {
 		super.initialize(parentModule, parameters);
 	}
-	
+
 	@UiField
 	TextBoxEx shuru;
-	
+
 	@UiField
 	ButtonEx btn;
-	
+
 	@UiField
 	PrimaryButton primaryBtn;
-	
+
 	@UiField
 	HTMLPanel checkList;
-	
+
 	@UiField
 	ListBoxEx listBox;
-	
+
 	@UiField
 	HTMLPanel radioList;
-	
+
 	@UiField
 	TableEx table;
-	
+
 	@UiField
 	NumberTextBox numText;
-	
+
 	@UiField
 	TabBarEx tab;
-	
+
 	@UiField
 	HTMLPanel tabContent;
-	
+
 	@UiField
 	DangerButton dangerBtn;
-	
+
 	TestDialogBox dialog;
-	
+
 	@UiField
 	GridEx grid;
-	
+
 	@UiField
 	ImageEx image;
-	
+
+	@UiField
+	MenuBar menu;
+
 	@UiHandler("dangerBtn")
-	void onClick( ClickEvent event ){
+	void onClick(ClickEvent event) {
 		dialog = new TestDialogBox();
 		dialog.setGlassEnabled(true);
 		dialog.setAutoHideEnabled(true);
 		dialog.setModal(true);
 		dialog.center();
 	}
-	
-	
-	ClickHandler btnHandler = new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-//			int count = checkList.getWidgetCount();
-//			String text = "";
-//			for (int i = 0; i < count; i++) {
-//				CheckBoxEx ex = (CheckBoxEx)checkList.getWidget(i);
-//				Boolean value = ex.getValue();
-//				if( value == true ){
-//					text += ex.getText()+",";
-//				}
-//			}
-//			Window.alert(text);
-			
-			boolean flag = numText.checkNum();
-			GWT.log(flag+"");
-		}
+
+	ClickHandler btnHandler=new ClickHandler(){
+
+	@Override public void onClick(ClickEvent event){
+	// int count = checkList.getWidgetCount();
+	// String text = "";
+	// for (int i = 0; i < count; i++) {
+	// CheckBoxEx ex = (CheckBoxEx)checkList.getWidget(i);
+	// Boolean value = ex.getValue();
+	// if( value == true ){
+	// text += ex.getText()+",";
+	// }
+	// }
+	// Window.alert(text);
+
+	boolean flag=numText.checkNum();GWT.log(flag+"");}};
+
+	ClickHandler primaryBtnHandler=new ClickHandler(){
+
+	@Override public void onClick(ClickEvent event){
+	// ButtonEx ex = (ButtonEx)event.getSource();
+	// String data = (String)ex.getData();
+	// Window.alert(data);
+
+	int count=radioList.getWidgetCount();for(int i=0;i<count;i++){RadioButtonEx ex=(RadioButtonEx)radioList.getWidget(i);if(ex.getValue()==true){Window.alert(ex.getText());}}}};
+
+	ClickHandler checkHandler=new ClickHandler(){
+
+	@Override public void onClick(ClickEvent event){
+	// CheckBoxEx ex = (CheckBoxEx)event.getSource();
+	// Boolean value = ex.getValue();
+	// if(value == true ){
+	// Window.alert(ex.getText());
+	// }
+	}
+
 	};
-	
-	ClickHandler primaryBtnHandler = new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-//			ButtonEx ex = (ButtonEx)event.getSource();
-//			String data = (String)ex.getData();
-//			Window.alert(data);
-			
-			int count = radioList.getWidgetCount();
-			for (int i = 0; i < count; i++) {
-				RadioButtonEx ex = (RadioButtonEx)radioList.getWidget(i);
-				if(ex.getValue() == true ){
-					Window.alert(ex.getText());
-				}
-			}
-		}
-	};
-	
-	ClickHandler checkHandler = new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-//			CheckBoxEx ex = (CheckBoxEx)event.getSource();
-//			Boolean value = ex.getValue();
-//			if(value == true ){
-//				Window.alert(ex.getText());
-//			}
-		}
-		
-	};
-	
-	void initTable(){
+
+	void initTable() {
 		table.removeAllRows();
-		int column =0;
-		int row = 0 ;
+		int column = 0;
+		int row = 0;
 		table.setText(row, column++, "ID");
 		table.setText(row, column++, "用户");
 		row++;
@@ -190,48 +183,65 @@ public class ItemTest extends AbstractModule {
 		table.setText(row, column++, "1");
 		table.setText(row, column++, "yolanda");
 		row++;
-		column=0;
+		column = 0;
 		table.setText(row, column++, "2");
 		table.setText(row, column++, "Joanna");
-		
+
 		table.format(true);
 	}
-	
-	void initTab(){
+
+	void initTab() {
 		tab.addTab("tab1");
 		tab.addTab("tab2");
 		tab.addTab("tab3");
 		tab.addSelectionHandler(selectedHandler);
 		tab.selectTab(0);
 	}
-	
-	SelectionHandler<Integer> selectedHandler = new SelectionHandler<Integer>() {
-		
-		@Override
-		public void onSelection(SelectionEvent<Integer> event) {
-			tabContent.clear();
-			if( event.getSelectedItem() == 0 ){
-				PrimaryButton btn = new PrimaryButton();
-				btn.setText("测试tab1");
-				tabContent.add(btn);
-			}
-		}
-	};
-	
-	void initGrid(){
-//		int row = 0;
-//		int cloumn = 0;
-//		grid.setText(row, cloumn++, "测试id");
-//		grid.setText(row, cloumn++, "测试用户名");
-//		grid.setText(row, cloumn++, "测试密码");
-//		
-//		grid.setText(row, cloumn++, "1");
-//		grid.setText(row, cloumn++, "huanglina");
-//		grid.setText(row, cloumn++, "123456");
-//		
-//		grid.setText(row, cloumn++, "2");
-//		grid.setText(row, cloumn++, "黄丽娜");
-//		grid.setText(row, cloumn++, "123456");
+
+	SelectionHandler<Integer> selectedHandler=new SelectionHandler<Integer>(){
+
+	@Override public void onSelection(SelectionEvent<Integer>event){tabContent.clear();if(event.getSelectedItem()==0){PrimaryButton btn=new PrimaryButton();btn.setText("测试tab1");tabContent.add(btn);}}};
+
+	void initGrid() {
+		// int row = 0;
+		// int cloumn = 0;
+		// grid.setText(row, cloumn++, "测试id");
+		// grid.setText(row, cloumn++, "测试用户名");
+		// grid.setText(row, cloumn++, "测试密码");
+		//
+		// grid.setText(row, cloumn++, "1");
+		// grid.setText(row, cloumn++, "huanglina");
+		// grid.setText(row, cloumn++, "123456");
+		//
+		// grid.setText(row, cloumn++, "2");
+		// grid.setText(row, cloumn++, "黄丽娜");
+		// grid.setText(row, cloumn++, "123456");
 	}
-	
+
+	void initMenu() {
+		for (int i = 0; i < 6; i++) {
+			MenuItem item;
+			if (i == 3) {
+				MenuBar mb = new MenuBar(true);
+				for (int j = 0; j < 3; j++) {
+					ScheduledCommand cm = new ScheduledCommand() {
+						@Override
+						public void execute() {
+						}
+					};
+					MenuItem mi = new MenuItem("子菜单"+(j==0?"测试长度菜单测试长度":j), cm);
+					mb.addItem(mi);
+				}
+				item = new MenuItem("测试菜单"+i , mb);
+			} else {
+				ScheduledCommand comm = new ScheduledCommand() {
+					@Override
+					public void execute() {
+					}
+				};
+				item = new MenuItem("测试菜单" + i, comm);
+			}
+			menu.addItem(item);
+		}
+	}
 }
